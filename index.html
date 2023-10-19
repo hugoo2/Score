@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Scores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .score {
+            font-size: 300px;  /* Réduisez la taille de la police si nécessaire */
+        }
+        .scores {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;  /* Permet aux éléments de passer à la ligne suivante si nécessaire */
+        }
+        .score-container {
+            width: 45%;  /* Donne plus d'espace à chaque conteneur de score */
+            margin: 20px;
+            text-align: center;
+        }
+
+        .point{
+            margin-top: 8%;
+        }
+        .nom{
+          font-size: 120%;
+        }
+        a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+        /* Mode sombre */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        body.dark-mode button {
+            background-color: #0000FF;  /* Bleu flash */
+        }
+
+        body.dark-mode button:hover {
+            background-color: #0000AA;  /* Une nuance légèrement plus foncée pour l'effet de survol */
+        }
+
+
+        /* Style du bouton */
+        #darkModeToggle {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #darkModeToggle:hover {
+            background-color: #ddd;
+        }
+
+        /* Mode sombre pour le bouton */
+        body.dark-mode #darkModeToggle {
+            background-color: #555;
+            color: white;
+        }
+
+        body.dark-mode #darkModeToggle:hover {
+            background-color: #777;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;  /* Vert par défaut */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="playerInput">
+        <h1>Entrez les noms des joueurs</h1>
+        Joueur 1: <input type="text" id="joueur1Name">
+        Joueur 2: <input type="text" id="joueur2Name">
+        <button id="startButton" onclick="startGame()">Commencer</button>
+    </div>
+    
+
+    <div id="gameArea" style="display:none;">
+        <button onclick="resetScores()">Réinitialiser les scores</button>
+        <button id="changeTeamsBtn" onclick="changeTeams()">Changer les équipes</button>
+        <button id="darkModeToggle" onclick="toggleDarkMode()">Mode sombre</button>
+        <h1>Score</h1>
+        <div class="scores">
+            <div class="score-container">
+                <div class="score" id="score1">0</div>
+                <p class="nom" id="joueur1Display"></p>
+                <div class="point">
+                    <button onclick="incrementScore('joueur1')">Ajouter un point</button>
+                    <button onclick="decrementScore('joueur1')">Retirer un point</button>
+                </div>
+            </div>
+            <div class="score-container">
+                <div class="score" id="score2">0</div>
+                <p class="nom" id="joueur2Display"></p>
+                <div class="point">
+                    <button onclick="incrementScore('joueur2')">Ajouter un point</button>
+                    <button onclick="decrementScore('joueur2')">Retirer un point</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('darkModeToggle').addEventListener('click', function() {
+            var button = document.getElementById('darkModeToggle');
+            document.body.classList.toggle('dark-mode');
+            var currentMode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    
+            // Mise à jour du texte du bouton selon le mode
+            button.innerText = currentMode === 'dark' ? 'Mode clair' : 'Mode sombre';
+    
+            localStorage.setItem('theme', currentMode);
+        });
+    
+        // Au chargement, vérifiez le thème précédemment défini
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var savedTheme = localStorage.getItem('theme') || 'light';
+            var button = document.getElementById('darkModeToggle');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                button.innerText = 'Mode clair';
+            } else {
+                button.innerText = 'Mode sombre';
+            }
+        });
+    
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
