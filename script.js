@@ -104,16 +104,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
         startGame();
     }
 });
-
-// Cette fonction vérifie le nom du joueur et ajoute un point si nécessaire
-function checkPlayerNameAndIncrementScore() {
-    if (document.getElementById("joueur1Display").textContent.includes("mi")) {
-        incrementScore('joueur1');
-    } else if (document.getElementById("joueur2Display").textContent.includes("mi")) {
-        incrementScore('joueur2');
-    }
-}
-
-// Cet intervalle s'exécutera toutes les 10 minutes
-setInterval(checkPlayerNameAndIncrementScore, 600000);  // 600000 millisecondes = 10 minutes
-
