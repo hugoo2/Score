@@ -29,8 +29,16 @@ function startGame() {
 
 function incrementScore(joueur) {
     scores[joueur]++;
-    setCookie(joueur + "Score", scores[joueur], 7); // Sauvegarde du score dans les cookies
     updateDisplay(joueur);
+    
+    // Affichez l'overlay
+    let overlay = document.getElementById("goalOverlay");
+    overlay.style.display = "flex"; // Utilisez flex pour centrer l'image et le texte
+
+    // Cachez l'overlay après quelques secondes
+    setTimeout(() => {
+        overlay.style.display = "none";
+    }, 1800); // Cachez après 3 secondes
 }
 
 function decrementScore(joueur) {
