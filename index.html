@@ -91,7 +91,47 @@
         button:hover {
             background-color: #45a049;
         }
+        #goalOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* pour s'assurer qu'il apparaît au-dessus des autres éléments */
+        }
 
+        #goalOverlay img {
+            max-width: 80%;
+            max-height: 60%;
+            margin-bottom: 20px;
+        }
+
+        #goalOverlay h1 {
+            color: white;
+            font-size: 3em;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.1);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #goalOverlay img, #goalOverlay h1 {
+            animation: bounceIn 0.8s;
+        }
 
     </style>
 </head>
@@ -155,5 +195,9 @@
     
     </script>
     <script src="script.js"></script>
+
+    <div id="goalOverlay">
+        <img src="images/image.png" alt="Goal Image">
+    </div>
 </body>
 </html>
