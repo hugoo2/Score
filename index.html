@@ -43,15 +43,15 @@
         }
         /* Mode sombre */
         body.dark-mode {
-            background-color: #121212;
+            background-color: #111827;
             color: white;
         }
         body.dark-mode button {
-            background-color: #0000FF;  /* Bleu flash */
+            background-color: #368bdb;  /* Bleu flash */
         }
 
         body.dark-mode button:hover {
-            background-color: #0000AA;  /* Une nuance légèrement plus foncée pour l'effet de survol */
+            background-color: #368bdb;  /* Une nuance légèrement plus foncée pour l'effet de survol */
         }
 
 
@@ -93,11 +93,13 @@
         }
         #goalOverlay {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
             background: rgba(0,0,0,0.8);
             justify-content: center;
             align-items: center;
@@ -107,7 +109,6 @@
         #goalOverlay img {
             max-width: 80%;
             max-height: 60%;
-            margin-bottom: 20px;
         }
 
         #goalOverlay h1 {
@@ -133,15 +134,105 @@
             animation: bounceIn 0.8s;
         }
 
+        #goalScorerModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+
+        #scorerImage {
+            max-width: 300px;  /* ou toute autre taille que vous préférez */
+        }
+        .absolute-mid{
+            display: block !important;
+            position: fixed;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        #bouton-start{
+            margin-top: 2%;
+        }
+        .team-form {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-form h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .team-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .team-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        #bouton-start {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+        }
+
+        #playerInput{
+            margin: auto;
+            width: 40%;
+        }
+
     </style>
 </head>
 <body>
     <div id="playerInput">
         <h1>Entrez les noms des joueurs</h1>
-        Joueur 1: <input type="text" id="joueur1Name">
-        Joueur 2: <input type="text" id="joueur2Name">
-        <button id="startButton" onclick="startGame()">Commencer</button>
+        
+        <div class="team-form">
+            <h2>Équipe 1:</h2>
+            <label for="teamName1">Nom de l'équipe:</label>
+            <input type="text" id="teamName1" placeholder="Nom d'équipe 1">
+            <label for="joueur1Player1">Joueur 1:</label>
+            <input type="text" id="joueur1Player1" placeholder="Joueur 1">
+            <label for="joueur1Player2">Joueur 2:</label>
+            <input type="text" id="joueur1Player2" placeholder="Joueur 2">
+            <label for="joueur1Player3">Joueur 3:</label>
+            <input type="text" id="joueur1Player3" placeholder="Joueur 3">
+        </div>
+    
+        <div class="team-form">
+            <h2>Équipe 2:</h2>
+            <label for="teamName2">Nom de l'équipe:</label>
+            <input type="text" id="teamName2" placeholder="Nom d'équipe 2">
+            <label for="joueur2Player1">Joueur 1:</label>
+            <input type="text" id="joueur2Player1" placeholder="Joueur 1">
+            <label for="joueur2Player2">Joueur 2:</label>
+            <input type="text" id="joueur2Player2" placeholder="Joueur 2">
+            <label for="joueur2Player3">Joueur 3:</label>
+            <input type="text" id="joueur2Player3" placeholder="Joueur 3">
+        </div>
+    
+        <button id="bouton-start" onclick="startGame()">Commencer</button>
     </div>
+    
     
 
     <div id="gameArea" style="display:none;">
@@ -169,6 +260,22 @@
         </div>
     </div>
 
+    
+
+
+    <div id="goalScorerModal" style="display:none;">
+        <h2>Choisir le buteur</h2>
+        <select id="scorerSelect">
+            <!-- Options ajoutées dynamiquement -->
+        </select>
+        <button onclick="confirmGoal()">Confirmer le but</button>
+    </div>
+
+    <div id="goalOverlay">
+        <img id="goalImage" src="" alt="Image du buteur" style="margin: auto">
+        </div>
+    </div>
+    
     <script>
         document.getElementById('darkModeToggle').addEventListener('click', function() {
             var button = document.getElementById('darkModeToggle');
@@ -196,8 +303,5 @@
     </script>
     <script src="script.js"></script>
 
-    <div id="goalOverlay">
-        <img src="images/image.png" alt="Goal Image">
-    </div>
 </body>
 </html>
